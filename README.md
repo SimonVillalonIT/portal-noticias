@@ -1,4 +1,4 @@
-# 📰 Portal de Noticias - Proyecto Personal
+# 📰 Portal de Noticias 
 
 Este proyecto es un **portal de noticias** hecho con **Astro**, **Sanity CMS + Sanity Studio**, **DaisyUI** (sobre TailwindCSS) y desplegado en **Vercel**.  
 Se recopilan noticias de diferentes fuentes, siempre referenciando adecuadamente.
@@ -11,7 +11,7 @@ Se recopilan noticias de diferentes fuentes, siempre referenciando adecuadamente
 - [x] Inicializar proyecto Astro
 - [x] Configurar DaisyUI + TailwindCSS
 - [x] Crear estructura básica de carpetas (`src/pages`, `src/components`, `src/layouts`)
-- [ ] Configurar Sanity y crear proyecto
+- [x] Configurar Sanity y crear proyecto
 - [ ] Crear esquema de "Noticia" en Sanity (título, imagen, contenido, autor, fecha, fuente)
 - [ ] Configurar Sanity Studio para cargar noticias (panel de admin externo)
 
