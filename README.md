@@ -1,48 +1,47 @@
-# Astro Starter Kit: Basics
+# 📰 Portal de Noticias - Proyecto Personal
 
-```sh
-bun create astro@latest -- --template basics
-```
+Este proyecto es un **portal de noticias** hecho con **Astro**, **Sanity CMS + Sanity Studio**, **DaisyUI** (sobre TailwindCSS) y desplegado en **Vercel**.  
+Se recopilan noticias de diferentes fuentes, siempre referenciando adecuadamente.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+---
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## 📋 Checklist de tareas
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+### Setup Inicial
+- [x] Inicializar proyecto Astro
+- [x] Configurar DaisyUI + TailwindCSS
+- [x] Crear estructura básica de carpetas (`src/pages`, `src/components`, `src/layouts`)
+- [ ] Configurar Sanity y crear proyecto
+- [ ] Crear esquema de "Noticia" en Sanity (título, imagen, contenido, autor, fecha, fuente)
+- [ ] Configurar Sanity Studio para cargar noticias (panel de admin externo)
 
-## 🚀 Project Structure
+### Frontend Público
+- [ ] Conectar Astro al CMS Sanity (fetch de noticias)
+- [ ] Crear layout principal del sitio
+- [ ] Listar las noticias en la homepage
+- [ ] Página individual de noticia (`/noticias/[slug]`)
+- [ ] Agregar navegación simple (Home, Noticias, Contacto opcional)
+- [ ] Estilizar el sitio con DaisyUI (estética minimalista y limpia)
 
-Inside of your Astro project, you'll see the following folders and files:
+### Mejoras y Detalles
+- [ ] Agregar Metadata (SEO básico) con Astro
+- [ ] Agregar favicon y título personalizado
+- [ ] Agregar componente de Loader/Spinner mientras carga contenido
+- [ ] Agregar mensajes de error o estados vacíos si no hay noticias
+- [ ] Agregar pie de página (footer) con créditos y links
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+### Deploy
+- [x] Subir repositorio a GitHub
+- [ ] Conectar proyecto a Vercel
+- [ ] Configurar variables de entorno necesarias en Vercel (por ejemplo, Sanity API keys si fueran privadas)
+- [ ] Hacer deploy en producción 🎉
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+---
 
-## 🧞 Commands
+## 🚀 Tecnologías usadas
+- **Astro** — Frontend framework ultra rápido
+- **TailwindCSS + DaisyUI** — Estilos rápidos y hermosos
+- **Sanity.io + Sanity Studio** — Headless CMS para gestionar el contenido
+- **Vercel** — Deploy automático en la nube
 
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `bun install`             | Installs dependencies                            |
-| `bun dev`             | Starts local dev server at `localhost:4321`      |
-| `bun build`           | Build your production site to `./dist/`          |
-| `bun preview`         | Preview your build locally, before deploying     |
-| `bun astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `bun astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+---
