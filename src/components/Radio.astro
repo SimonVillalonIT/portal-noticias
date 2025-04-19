@@ -1,0 +1,92 @@
+---
+const radioStreamURL = "https://streaming01.shockmedia.com.ar:10856/;";
+---
+
+<section
+  class="flex items-center justify-around text-white rounded-xl w-full p-4 gap-6 border-b-3 border-base-200"
+>
+  <audio id="radioPlayer" src={radioStreamURL} hidden></audio>
+  <div
+    id="radioStatus"
+    class="cursor-pointer font-medium flex items-center bg-blue-600 rounded-2xl py-1 px-2 text-center transition-all"
+  >
+    🎧 Escuchar
+  </div>
+
+  <div class="dropdown dropdown-center dropdown-hover">
+    <div tabindex="0" role="button">
+      <img
+        id="volumeIcon"
+        src="/icons/volume-mute.svg"
+        class="w-6 h-6 cursor-pointer"
+        alt="Control de volumen"
+      />
+    </div>
+    <ul
+      tabindex="0"
+      class="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm"
+    >
+      <li>
+        <input
+          type="range"
+          min="0"
+          max="1"
+          step="0.01"
+          value="0.5"
+          id="volumeSlider"
+          class="w-full max-w-xs"
+        />
+      </li>
+    </ul>
+  </div>
+
+  <div class="text-base-content">
+    <h4 class="m-0 p-0">Radio FM Sol (Esquel)</h4>
+    <p class="font-thin text-sm m-0 p-0">94.7 FM</p>
+  </div>
+</section>
+
+<script type="module">
+  document.addEventListener("DOMContentLoaded", () => {
+    const audio = document.getElementById("radioPlayer");
+    const radioStatus = document.getElementById("radioStatus");
+    const volumeSlider = document.getElementById("volumeSlider");
+    const volumeIcon = document.getElementById("volumeIcon");
+
+    const updateVolumeIcon = (volume) => {
+      if (volume === 0) {
+        volumeIcon.src = "/icons/volume-mute.svg";
+      } else {
+        volumeIcon.src = "/icons/volume.svg";
+      }
+    };
+
+    radioStatus.addEventListener("click", () => {
+      audio
+        .play()
+        .then(() => {
+          radioStatus.innerHTML = `
+          <div class="size-3 mr-2 bg-white rounded-full animate-pulse"></div>
+          <span>En vivo</span>
+        `;
+          radioStatus.classList.remove("bg-blue-600");
+          radioStatus.classList.add("bg-red-600");
+
+          updateVolumeIcon(audio.volume);
+        })
+        .catch((err) => {
+          console.warn("No se pudo reproducir:", err);
+        });
+    });
+
+    volumeSlider.addEventListener("input", () => {
+      const newVolume = parseFloat(volumeSlider.value);
+      audio.volume = newVolume;
+      updateVolumeIcon(newVolume);
+    });
+
+    const initialVolume = parseFloat(volumeSlider.value);
+    audio.volume = initialVolume;
+    updateVolumeIcon(initialVolume);
+  });
+</script>
