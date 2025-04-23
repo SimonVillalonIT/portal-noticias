@@ -1,0 +1,25 @@
+---
+import { sanity } from "../lib/sanity-client.ts";
+
+const news: NewType[] =
+    await sanity.fetch(`*[_type == "news"] | order(_createdAt desc)[0...10] {
+  _id,
+  title,
+  category,
+  source,
+  content,
+  image,
+  imageUrl
+}`);
+
+const lastNew = news[0];
+---
+
+<section>
+    <article class="text-2xl font-semibold px-2 mt-4">
+        <h1 class="px-3">
+            {lastNew.title}
+        </h1>
+        <img class="mt-6" src={lastNew.imageUrl || lastNew.image?.asset?.url} alt="">
+    </article>
+</section>

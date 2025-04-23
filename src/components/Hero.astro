@@ -1,0 +1,22 @@
+---
+import { sanity } from "../lib/sanity-client.ts";
+import NewCard from "./NewCard.astro";
+
+const news: NewType[] =
+    await sanity.fetch(`*[_type == "news"] | order(_createdAt desc)[0...10] {
+  _id,
+  title,
+  category,
+  source,
+  content,
+  image,
+  imageUrl
+}`);
+
+---
+
+<section>
+  {news.map((newItem) => (
+    <NewCard newItem={newItem} />
+  ))}  
+</section>
