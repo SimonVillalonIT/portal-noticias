@@ -1,6 +1,7 @@
 ---
 import Header from "../components/Header.astro";
 import Radio from "../components/Radio.astro";
+import Footer from "../components/Footer.astro";
 import "../styles/global.css";
 ---
 
@@ -9,7 +10,7 @@ import "../styles/global.css";
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/Favicon.ico" />
     <meta name="generator" content={Astro.generator} />
     <title>PulsaNoticias</title>
   </head>
@@ -17,6 +18,7 @@ import "../styles/global.css";
     <Header />
     <Radio />
     <slot />
+    <Footer />
   </body>
 </html>
 

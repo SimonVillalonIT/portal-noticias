@@ -1,0 +1,25 @@
+---
+interface Props {
+  newItem: NewType;
+}
+const { newItem } = Astro.props as Props;
+---
+
+<div class="card card-side bg-base-100 shadow-sm w-full">
+  <figure>
+    <img
+      class="size-5/6 rounded-lg"
+      src={newItem.imageUrl || newItem.image?.asset?.url}
+      alt=""
+    />
+  </figure>
+  <div class="card-body min-w-2/3">
+    <h2 class="card-title">{newItem.title}</h2>
+    <p>{newItem.summary}</p>
+     <div class="card-actions justify-end">
+      <div class="badge badge-primary text-primary-content">
+        {newItem.category}
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,22 +1,45 @@
 ---
 import { sanity } from "../lib/sanity-client.ts";
-import NewCard from "./NewCard.astro";
+import MainNewCard from "./NewsCards/MainNewCard.astro";
+import NewCardRight from "./NewsCards/NewCardRight.astro";
+import NewCardLeft from "./NewsCards/NewCardLeft.astro";
 
-const news: NewType[] =
-    await sanity.fetch(`*[_type == "news"] | order(_createdAt desc)[0...10] {
-  _id,
-  title,
-  category,
-  source,
-  content,
-  image,
-  imageUrl
-}`);
+const allNews: NewType[] = await sanity.fetch(
+  `*[_type == "news"] | order(_createdAt desc)[0...10] {
+    _id,
+    title,
+    summary,
+    category,
+    source,
+    content,
+    image,
+    imageUrl
+  }`,
+);
 
+const [firstNews, ...otherNews] = allNews;
 ---
 
-<section>
-  {news.map((newItem) => (
-    <NewCard newItem={newItem} />
-  ))}  
+<section class="flex flex-col items-center gap-8">
+  {
+    firstNews && (
+      <div class="w-full max-w-4xl flex justify-center">
+        <MainNewCard newItem={firstNews} />
+      </div>
+    )
+  }
+  <div
+    class="justify-center items-center w-full grid grid-cols-1 md:grid-cols-2 gap-6"
+  >
+    {
+      otherNews.map((item, idx) => {
+        const isEven = idx % 2 === 0;
+        return isEven ? (
+          <NewCardLeft newItem={item} />
+        ) : (
+          <NewCardRight newItem={item} />
+        );
+      })
+    }
+  </div>
 </section>
