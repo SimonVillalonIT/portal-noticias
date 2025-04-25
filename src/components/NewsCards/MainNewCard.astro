@@ -10,12 +10,12 @@ const { newItem } = Astro.props as Props;
     <img src={newItem.imageUrl || newItem.image?.asset?.url} alt="Shoes" />
   </figure>
   <div class="card-body">
-    <h2 class="card-title">
+    <h2 class="card-title text-2xl">
       {newItem.title}
     </h2>
-    <p>{newItem.summary}</p>
+    <p class="text-lg">{newItem.summary}</p>
     <div class="card-actions justify-end">
-      <div class="badge badge-primary text-primary-content">
+      <div class="badge badge-accent text-accent-content font-medium uppercase">
         {newItem.category}
       </div>
     </div>

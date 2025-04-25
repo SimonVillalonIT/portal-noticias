@@ -20,7 +20,7 @@ const allNews: NewType[] = await sanity.fetch(
 const [firstNews, ...otherNews] = allNews;
 ---
 
-<section class="flex flex-col items-center gap-8">
+<section class="flex flex-col items-center gap-8 mb-4">
   {
     firstNews && (
       <div class="w-full max-w-4xl flex justify-center">
@@ -29,7 +29,7 @@ const [firstNews, ...otherNews] = allNews;
     )
   }
   <div
-    class="justify-center items-center w-full grid grid-cols-1 md:grid-cols-2 gap-6"
+    class="justify-center items-center w-full grid grid-cols-1 md:grid-cols-2 gap-6 px-4"
   >
     {
       otherNews.map((item, idx) => {
