@@ -11,4 +11,5 @@ type NewType = {
   category: string;
   source: string;
   content: string;
+  slug: { current: string, "_type": "slug" };
 };

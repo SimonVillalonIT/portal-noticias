@@ -78,6 +78,16 @@ export default defineType({
       ],
       validation: (Rule) => Rule.required().min(1),
     }),
+    defineField({
+      name: 'slug',
+      title: 'Slug',
+      type: 'slug',
+      validation: (Rule) => Rule.required(),
+      options: {
+        source: 'title', // genera el slug automáticamente a partir del título
+        maxLength: 96,
+      },
+    })
   ],
 
   // Validación a nivel documento: al menos una imagen
