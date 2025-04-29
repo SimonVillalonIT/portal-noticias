@@ -1,0 +1,7 @@
+<!-- components/SkeletonGrid.astro -->
+---
+const count = Astro.props.count ?? 4;
+---
+{Array.from({ length: count }).map(() => (
+  <div class="skeleton-card animate-pulse bg-base-200 rounded-md h-[200px] w-full"></div>
+))}

@@ -16,29 +16,31 @@ const post = await sanity.fetch(
       imageUrl,
       source
   }`,
-  { slug }
+  { slug },
 );
 
 // Verifica si el post existe
 if (!post) {
-    throw new Error(`Post no encontrado: ${slug}`);
+  throw new Error(`Post no encontrado: ${slug}`);
 }
 ---
 
 <Layout title={post.title}>
-    <h1 class="my-6 px-6 text-center font-semibold text-4xl text-base-content">{post.title}</h1>
+  <h1 class="my-6 px-6 text-center font-semibold text-4xl text-base-content">
+    {post.title}
+  </h1>
 
-    <!-- Mostrar la imagen si existe -->
-    {post.imageUrl && <img src={post.imageUrl} alt={post.title} />}
+  <!-- Mostrar la imagen si existe -->
+  {post.imageUrl && <img src={post.imageUrl} alt={post.title} />}
 
-    <p>{post.source}</p>
+  <p>{post.source}</p>
 
-    <article>
-        <!-- Renderizar el contenido del post -->
-        {post.content.map((block: any) => (
-            <p>
-                {block.children.map((child: any) => child.text).join(' ')}
-            </p>
-        ))}
-    </article>
+  <article>
+    <!-- Renderizar el contenido del post -->
+    {
+      post.content.map((block: any) => (
+        <p>{block.children.map((child: any) => child.text).join(" ")}</p>
+      ))
+    }
+  </article>
 </Layout>

@@ -1,0 +1,72 @@
+---
+import { sanity } from "../lib/sanity-client.ts";
+import MainNewCard from "./NewsCards/MainNewCard.astro";
+import NewCardRight from "./NewsCards/NewCardRight.astro";
+import NewCardLeft from "./NewsCards/NewCardLeft.astro";
+import SkeletonGrid from "./SkeletonGrid.astro";
+
+const allNews: NewType[] = await sanity.fetch(
+  `*[_type == "news"] | order(_createdAt desc)[0...10] {
+    _id,
+    title,
+    summary,
+    category,
+    source,
+    content,
+    image,
+    imageUrl,
+    slug
+  }`,
+);
+
+const [firstNews, ...otherNews] = allNews;
+---
+
+<main class="flex flex-col items-center gap-8 mb-4 min-h-screen">
+  <!-- Skeleton principal -->
+  <div id="skeleton-main" class="w-full max-w-4xl flex justify-center">
+    <div
+      class="skeleton-card animate-pulse bg-base-200 rounded-md shadow w-full h-[250px]"
+    >
+    </div>
+  </div>
+
+  <!-- Contenido real, oculto por defecto -->
+  <div id="real-main" class="w-full max-w-4xl flex justify-center hidden">
+    {firstNews && <MainNewCard newItem={firstNews} />}
+  </div>
+
+  <div
+    id="skeleton-grid"
+    class="grid grid-cols-1 md:grid-cols-2 gap-6 px-4 w-full"
+  >
+    <SkeletonGrid count={6} />
+  </div>
+
+  <div
+    id="real-grid"
+    class="grid grid-cols-1 md:grid-cols-2 gap-6 px-4 w-full hidden"
+  >
+    {
+      otherNews.map((item, idx) => {
+        const isEven = idx % 2 === 0;
+        return isEven ? (
+          <NewCardLeft newItem={item} />
+        ) : (
+          <NewCardRight newItem={item} />
+        );
+      })
+    }
+  </div>
+</main>
+<script>
+  window.addEventListener("DOMContentLoaded", () => {
+    // Simulamos una pequeña espera por si todo se carga muy rápido
+    setTimeout(() => {
+      document.getElementById("skeleton-main")?.classList.add("hidden");
+      document.getElementById("skeleton-grid")?.classList.add("hidden");
+      document.getElementById("real-main")?.classList.remove("hidden");
+      document.getElementById("real-grid")?.classList.remove("hidden");
+    }, 300); // Podés ajustar el tiempo si querés
+  });
+</script>
