@@ -1,0 +1,20 @@
+---
+const {title, imageSrc, source, htmlContent} = Astro.props
+---
+<article class="max-w-3xl mx-auto">
+    <h1 class="text-4xl font-bold mb-4">{title}</h1>
+
+    {imageSrc && (
+      <img
+        src={imageSrc}
+        alt={title}
+        class="w-full rounded-md shadow mb-2"
+      />
+    )}
+
+    {source && (
+      <p class="text-sm text-gray-500 italic mb-6">Fuente: {source}</p>
+    )}
+
+    <div class="prose prose-lg max-w-none" set:html={htmlContent} />
+  </article>

@@ -1,46 +1,36 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import { sanity } from "../../lib/sanity-client";
+import { renderPortableText } from "../../lib/portable-text.ts";
+import Main from "../../components/NewsPage/main.astro";
 
-// Desactivar el prerenderizado para hacer la carga dinámica
 export const prerender = false;
 
-const { slug } = Astro.params; // Obtén el slug de la URL
+const { slug } = Astro.params;
 
-// Obtención del post por slug (usando slug.current)
 const post = await sanity.fetch(
   `*[_type == "news" && slug.current == $slug][0]{
-      title,
-      summary,
-      content,
-      imageUrl,
-      source
+    title,
+    content,
+    source,
+    imageUrl,
+    image {
+      asset->{
+        url
+      }
+    }
   }`,
-  { slug },
+  { slug }
 );
 
-// Verifica si el post existe
 if (!post) {
   throw new Error(`Post no encontrado: ${slug}`);
 }
+
+const htmlContent = renderPortableText(post.content);
+const imageSrc = post.imageUrl || post.image?.asset?.url;
 ---
 
 <Layout title={post.title}>
-  <h1 class="my-6 px-6 text-center font-semibold text-4xl text-base-content">
-    {post.title}
-  </h1>
-
-  <!-- Mostrar la imagen si existe -->
-  {post.imageUrl && <img src={post.imageUrl} alt={post.title} />}
-
-  <p>{post.source}</p>
-
-  <article>
-    <!-- Renderizar el contenido del post -->
-    {
-      post.content.map((block: any) => (
-        <p>{block.children.map((child: any) => child.text).join(" ")}</p>
-      ))
-    }
-  </article>
+  <Main title={post.title} imageSrc={imageSrc} source={post.source} htmlContent={htmlContent} /> 
 </Layout>
